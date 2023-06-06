@@ -10,11 +10,25 @@ class Teacher(BaseModel):
     class Config:
         orm_mode = True
 
+
 class Student(BaseModel):
     name : str
     department : str
-    teacher_id : Teacher
 
+    class Config:
+        orm_mode = True
+
+
+
+class AddTeacher(BaseModel):
+    teacher_id : int
+
+
+
+class ViewStudentWithTeacher(BaseModel):
+    name : str
+    department : str
+    teacher : Teacher
 
     class Config:
         orm_mode = True

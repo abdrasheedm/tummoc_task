@@ -124,9 +124,23 @@ def delete_teacher(id, db: Session = Depends(get_db)):
 
 
 # Assign Student To a Particular Teacher
-@app.put('/students/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['Students'])
-def assign_teacher(id, request:schemas.Student, db: Session = Depends(get_db)):
-    student = db.query(models.Student).filter(models.Student.id == id)
+@app.put('/student/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['Assign Teacher'])
+def assign_teacher(id:int , request:schemas.AddTeacher, db: Session = Depends(get_db)):
+    student = db.query(models.Student).filter(models.Student.id == id).first()
     if not student.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Student with id {id} not found")
     student.update({"teacher_id": request.teacher_id})
+    db.commit()
+    return 'Teacher assigned'
+
+
+
+#view Student with assigned Teacher
+@app.get('/student/{id}', tags=['Assign Teacher'], status_code=status.HTTP_200_OK, response_model=schemas.ViewStudentWithTeacher)
+def view_student_with_teacher(id:int , db: Session = Depends(get_db)):
+    student = db.query(models.Student).filter(models.Student.id == id).first()
+    if not student:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Student with id {id} not found")
+    if not student.teacher_id:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Teacher not assigned for this Student")
+    return student
