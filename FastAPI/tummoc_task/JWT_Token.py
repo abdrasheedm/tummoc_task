@@ -11,7 +11,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 ALGORITHM = env('ALGORITHM')
-ACCESS_TOKEN_EXPIRE_MINUTES = 15
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 def create_access_token(data: dict):
