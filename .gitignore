@@ -1,4 +1,5 @@
 FastAPI/fvenv/
+FastAPI/Teacher_Student_CRUD/.env
 FastAPI/school.db
 **/__pycache__/
 
