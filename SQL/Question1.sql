@@ -1,5 +1,3 @@
-
-
 select rp.route_id, r.name, SUM(rp.distance) AS total_distance
 FROM 
 routes AS r

@@ -11,7 +11,7 @@ def get_all(db: Session):
     return teachers
 
 
-def view(db:Session):
+def view(id, db:Session):
     teacher = db.query(models.Teacher).filter(models.Teacher.id == id).first()
     if not teacher:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Teacher with id {id} not found")
@@ -25,7 +25,7 @@ def add(request, db:Session):
     db.refresh(new_teacher)
     return new_teacher
 
-def update(request, db:Session):
+def update(id, request, db:Session):
     teacher = db.query(models.Teacher).filter(models.Teacher.id == id)
 
     if not teacher.first():

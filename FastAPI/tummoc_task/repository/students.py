@@ -50,6 +50,9 @@ def assign_teacher(id, request, db: Session):
     student = db.query(models.Student).filter(models.Student.id == id)
     if not student.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Student with id {id} not found")
+    teacher = db.query(models.Teacher).filter(models.Teacher.id == request.teacher_id)
+    if not teacher.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Teacher with id {request.teacher_id} not found")
     student.update({"teacher_id": request.teacher_id})
     db.commit()
     return 'Teacher assigned'

@@ -49,14 +49,14 @@ def delete_teacher(id:int, db: Session = Depends(get_db), current_user: schemas.
 
 
 # Assign Student To a Particular Teacher
-@router.put('/assign-teacher/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['Assign Teacher'])
+@router.put('/assign-teacher/{id}', status_code=status.HTTP_202_ACCEPTED)
 def assign_teacher(id:int , request:schemas.AddTeacher, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return students.assign_teacher(id, request, db)
 
 
 
 #view Student with assigned Teacher
-@router.get('/assigned-teacher/{id}', tags=['Assign Teacher'], status_code=status.HTTP_200_OK, response_model=schemas.ViewStudentWithTeacher)
+@router.get('/assigned-teacher/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ViewStudentWithTeacher)
 def view_student_with_teacher(id:int , db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return students.view_with_teacher(id, db)
 
