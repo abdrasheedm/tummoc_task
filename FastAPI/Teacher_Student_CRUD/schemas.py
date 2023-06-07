@@ -63,3 +63,10 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+
+class Distance(BaseModel):
+    x1 : int
+    x2 : int
+    y1 : int
+    y2 : int

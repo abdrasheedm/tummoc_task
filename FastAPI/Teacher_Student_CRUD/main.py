@@ -200,3 +200,12 @@ def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(g
     access_token = JWT_Token.create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
+
+# CALCULATE DISTANCE
+
+@app.post("/distance")
+def calculate_distance(request : schemas.Distance):
+    # Calculate the distance between two points using the distance formula
+    distance = math.sqrt((request.x1 - request.x2)**2 + (request.y1 - request.y2)**2)
+    return {"distance": distance}
+
