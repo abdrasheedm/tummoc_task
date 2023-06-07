@@ -66,7 +66,7 @@ class TokenData(BaseModel):
 
 
 class Distance(BaseModel):
-    x1 : int
-    x2 : int
-    y1 : int
-    y2 : int
+    lat1 : int
+    lat2 : int
+    lon1 : int
+    lon2 : int

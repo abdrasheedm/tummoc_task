@@ -206,6 +206,6 @@ def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(g
 @app.post("/distance")
 def calculate_distance(request : schemas.Distance):
     # Calculate the distance between two points using the distance formula
-    distance = math.sqrt((request.x1 - request.x2)**2 + (request.y1 - request.y2)**2)
+    distance = math.sqrt((request.lat2 - request.lat1)**2 + (request.lon2 - request.lon1)**2)
     return {"distance": distance}
 
